@@ -1,0 +1,13 @@
+@(jogos: List[Jogo])
+
+@main("Welcome to Play") {
+
+    <h2>Previously inserted cats:</h2>
+    <table>
+        <tr><th>Name</th><th>Color</th></tr>
+        @for(c <- jogos){
+            <tr><td>@c.titulo</td><td>@c.capa</td></tr>
+        }
+    </table>
+
+}

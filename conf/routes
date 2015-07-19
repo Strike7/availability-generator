@@ -9,5 +9,7 @@ GET        /db                  controllers.Application.db
 
 GET        /cover/:id           controllers.Cover.cover(id: String)
 
+GET        /jogos/novo          controllers.JogoController.insert
+GET        /jogos               controllers.JogoController.todos
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file        controllers.Assets.at(path="/public", file)
