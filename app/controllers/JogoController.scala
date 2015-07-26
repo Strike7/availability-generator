@@ -15,7 +15,7 @@ object JogoController extends Controller {
 
   def insert = DBAction { implicit rs =>
     Jogos.insert(
-      new Jogo(null, "teste", "teste123", true))
+      new Jogo(null, "teste", "dyinglight.png", true))
     Created
   }
 

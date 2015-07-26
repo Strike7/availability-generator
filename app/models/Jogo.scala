@@ -24,6 +24,10 @@ object Jogos {
     query.toList
   }
 
+  def get(id: Long)(implicit s: Session): Jogo = {
+    val query = jogos.filter(_.id === id)
+    jogos.first
+  }
   def insert(jogo: Jogo)(implicit s: Session) {
     jogos.insert(jogo)
   }

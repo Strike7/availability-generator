@@ -7,7 +7,7 @@ GET        /                    controllers.Application.index
 GET        /db                  controllers.Application.db
 
 
-GET        /cover/:id           controllers.Cover.cover(id: String)
+GET        /cover/:id           controllers.Cover.cover(id: Long)
 
 GET        /jogos/novo          controllers.JogoController.insert
 GET        /jogos               controllers.JogoController.todos
