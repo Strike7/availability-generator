@@ -9,7 +9,9 @@ GET        /db                  controllers.Application.db
 
 GET        /cover/:id           controllers.Cover.cover(id: Long)
 
-GET        /jogos/novo          controllers.JogoController.insert
+POST       /jogos/novo          controllers.JogoController.insert
 GET        /jogos               controllers.JogoController.todos
+PUT        /jogos/:id           controllers.JogoController.update(id: Long)
+
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file        controllers.Assets.at(path="/public", file)
