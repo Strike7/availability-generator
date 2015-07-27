@@ -14,6 +14,7 @@ object JogoController extends Controller {
 
     implicit val JogoWrites = new Writes[Jogo]{
       override def writes(jogo: Jogo): JsValue = Json.obj(
+        "id" -> JsNumber(jogo.id.get),
         "titulo" -> JsString(jogo.titulo),
         "capa" -> JsString(jogo.capa),
         "disponivel" -> JsBoolean(jogo.disponivel)

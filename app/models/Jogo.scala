@@ -4,7 +4,10 @@ import play.api.Play.current
 import play.api.db.slick.Config.driver.simple._
 import scala.slick.lifted.Tag
 
-case class Jogo(id: Option[Long], titulo: String, capa: String, disponivel: Boolean)
+case class Jogo(id: Option[Long], titulo: String, capa: String, disponivel: Boolean) {
+  def capaNome =
+    if(disponivel) capa else "ua-" + capa
+}
 
 class Jogos(tag: Tag) extends Table[Jogo](tag, "JOGOS") {
   def id = column[Option[Long]]("id", O.PrimaryKey, O.AutoInc)
@@ -21,15 +24,18 @@ object Jogos {
 
   def list(implicit s: Session) = {
     val query = jogos.list
-    query.toList
+    query toList
   }
 
   def get(id: Long)(implicit s: Session): Jogo = {
-    val query = jogos.filter(_.id === id)
-    jogos.first
+    jogos.filter( _.id === id ) first
   }
+
   def insert(jogo: Jogo)(implicit s: Session) {
     jogos.insert(jogo)
   }
 
+  def update(id: Long, jogo: Jogo)(implicit s: Session): Boolean = {
+    jogos.filter(_.id === id ).update(jogo) > 0
+  }
 }
