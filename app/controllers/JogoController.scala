@@ -16,7 +16,7 @@ object JogoController extends Controller {
       override def writes(jogo: Jogo): JsValue = Json.obj(
         "titulo" -> JsString(jogo.titulo),
         "capa" -> JsString(jogo.capa),
-        "disponivel" -> JsBoolean(jogo.disponivel)
+        "disponibilidade" -> JsBoolean(jogo.disponibilidade)
       )
     }
   implicit val jogoReads : Reads[Jogo] =
@@ -33,8 +33,19 @@ object JogoController extends Controller {
         )).as("application/json")
     }
 
-  def update( id :Long) = Action {
-    NotFound
+  def update( id :Long) = DBAction(BodyParsers.parse.json) { implicit rs =>
+    val jogoResult = rs.body.validate[Jogo]
+
+    jogoResult.fold(
+      erros => {
+        BadRequest
+      },
+      jogo => {
+        val jogoBanco = Jogos.get(id)
+        jogoBanco.disponibilidade = jogo.disponibilidade
+        Ok(Json.toJson(jogoBanco))
+      }
+    )
   }
 
   def insert = DBAction(BodyParsers.parse.json) { implicit rs =>
