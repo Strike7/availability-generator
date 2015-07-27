@@ -11,6 +11,6 @@ object Cover extends Controller {
 
   def cover(id: Long) = DBAction { implicit rs =>
     val jogo = Jogos.get(id)
-    Ok( URL + jogo.capaNome )
+    TemporaryRedirect( URL + jogo.capaNome )
   }
 }
