@@ -39,11 +39,14 @@ object JogoController extends Controller {
 
     jogoResult.fold(
       erros => {
+
         BadRequest
       },
       jogo => {
+
         val jogoBanco = Jogos.get(id)
         jogoBanco.disponibilidade = jogo.disponibilidade
+        Jogos.update(id, jogoBanco)
         Ok(Json.toJson(jogoBanco))
       }
     )
