@@ -1,24 +1,17 @@
-name := """play-getting-started"""
+name := "play-java-intro"
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
-
-scalaVersion := "2.11.1"
+lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
 libraryDependencies ++= Seq(
-  jdbc,
-  cache,
-  ws
+  javaJpa,
+  javaWs,
+  "org.hibernate" % "hibernate-entitymanager" % "4.3.7.Final"
 )
 
-libraryDependencies <+= scalaVersion("org.scala-lang" % "scala-compiler" % _ )
-
-
-
-libraryDependencies ++= Seq(
-     "com.typesafe.play" %% "play-slick" % "0.8.1"
-    ,"mysql" % "mysql-connector-java" % "5.1.36"
-    ,"com.typesafe.slick" %% "slick" % "2.1.0"
-    ,"org.postgresql" % "postgresql" % "9.4-1201-jdbc41"
-)
+libraryDependencies += "junit" % "junit" % "4.11"
+libraryDependencies += "org.mockito" % "mockito-all" % "1.9.5"
+// Play provides two styles of routers, one expects its actions to be injected, the
+// other, legacy style, accesses its actions statically.
+routesGenerator := InjectedRoutesGenerator
