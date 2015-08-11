@@ -8,6 +8,7 @@ public class Jogo {
     private final String titulo;
     private final String cover;
     private boolean disponiblidade = false;
+    private boolean disponibilidade;
 
 
     public Jogo(String titulo, String cover, boolean disponiblidade){
@@ -27,5 +28,9 @@ public class Jogo {
 
     public boolean isDisponiblidade() {
         return disponiblidade;
+    }
+
+    public void setDisponibilidade(boolean disponibilidade) {
+        this.disponibilidade = disponibilidade;
     }
 }
