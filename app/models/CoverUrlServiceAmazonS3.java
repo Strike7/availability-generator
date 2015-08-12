@@ -5,10 +5,14 @@ package models;
  */
 public class CoverUrlServiceAmazonS3 extends CoverUrlService {
 
-    private final String urlBase = "https://s3-sa-east-1.amazonaws.com/strike7-image/";
+    private final String urlBase = "http://s3-sa-east-1.amazonaws.com/strike7-image/";
 
 
     public String urlFrom(Jogo jogo){
-          return urlBase;
+        if (jogo.disponibilidade){
+            return urlBase + "cover/" + jogo.cover;
+        }else {
+            return urlBase + "cover+alugado/" + jogo.cover;
+        }
     }
 }

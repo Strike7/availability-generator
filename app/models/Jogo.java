@@ -1,36 +1,29 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Created by jesse on 08/08/15.
  */
+@Entity
 public class Jogo {
 
-    private final String titulo;
-    private final String cover;
-    private boolean disponiblidade = false;
-    private boolean disponibilidade;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    public Long id;
+    public final String titulo;
+    public final String cover;
+    public Boolean disponibilidade;
 
 
     public Jogo(String titulo, String cover, boolean disponiblidade){
         this.titulo = titulo;
         this.cover = cover;
-        this.disponiblidade = disponiblidade;
-
+        this.disponibilidade = disponiblidade;
     }
 
-    public String getTitulo() {
-        return titulo;
-    }
 
-    public String getCover() {
-        return cover;
-    }
-
-    public boolean isDisponiblidade() {
-        return disponiblidade;
-    }
-
-    public void setDisponibilidade(boolean disponibilidade) {
-        this.disponibilidade = disponibilidade;
-    }
 }
