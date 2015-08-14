@@ -100,6 +100,22 @@ public class JogoRouteTest {
     }
 
     @Test
+    public void createJogosTest() {
+
+        running(app, () -> {
+
+            Http.RequestBuilder request = new Http.RequestBuilder()
+                    .method(POST)
+                    .uri("/jogos")
+                    .bodyJson(
+                            Json.newObject().
+                                    set("jogos", Json.toJson(jogoDisponivel)));
+            Result response = route(request);
+            assertThat(response.status(), equalTo(CREATED));
+        });
+    }
+
+    @Test
     public void updateJogosBadRequestTest() {
 
         running(app, () ->{

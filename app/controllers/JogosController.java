@@ -28,6 +28,18 @@ public class JogosController extends Controller{
         List<Jogo> jogos = jogoRepository.list();
         return ok(resultJson(Json.toJson(jogos))).as(Http.MimeTypes.JSON);
     }
+    @Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result create() {
+
+        JsonNode jsonJogo = request().body().asJson();
+        if(jsonJogo == null || !jsonJogo.has("jogos") || jsonJogo.findPath("jogos").isArray()) {
+            return badRequest();
+        }
+        Jogo jogo = Json.fromJson(jsonJogo.findPath("jogos"), Jogo.class);
+        jogoRepository.save(jogo);
+        return created();
+    }
 
     @Transactional
     @BodyParser.Of(BodyParser.Json.class)
