@@ -14,4 +14,6 @@ public interface JogoRepository  {
     public Jogo find(Long id);
 
     public List<Jogo> list();
+
+    public void update(Jogo jogo);
 }

@@ -46,6 +46,19 @@ public class ModelJogoTest extends WithApplication {
     }
 
     @Test
+    public void testJogoUpdate(){
+        JPA.withTransaction(()->{
+            JogoRepository repo = new JogoRepositoryImpl();
+            repo.save(jogo);
+            Jogo expected = jogo.clone();
+            expected.disponibilidade = !expected.disponibilidade;
+            repo.update(expected);
+            Jogo result = repo.find(jogo.id);
+            assertThat(result, equalTo(expected));
+        });
+    }
+
+    @Test
     public void testCover(){
         String expected = "mkx.png";
         assertThat(jogo.cover, equalTo(expected));

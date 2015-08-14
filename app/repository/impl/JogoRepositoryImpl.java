@@ -34,4 +34,9 @@ public class JogoRepositoryImpl implements JogoRepository{
         return JPA.em().createQuery(
                 queryBuilder.select(queryBuilder.from(Jogo.class))).getResultList();
     }
+
+    @Override
+    public void update(Jogo jogo) {
+        JPA.em().merge(jogo);
+    }
 }
