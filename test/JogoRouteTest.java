@@ -38,11 +38,13 @@ public class JogoRouteTest extends WithApplication {
 
     @Override
     protected Application provideApplication() {
+
         JogoRepository repo = mock(JogoRepository.class);
         when(repo.find(10L)).thenReturn(jogoDisponivel);
         when(repo.find(11L)).thenReturn(jogoIndisponivel);
         when(repo.list()).thenReturn(Arrays.asList(jogoDisponivel, jogoIndisponivel));
         Module testModule = new AbstractModule() {
+
             @Override
             public void configure() {
                 bind(JogoRepository.class)
@@ -59,7 +61,9 @@ public class JogoRouteTest extends WithApplication {
 
     @Test
     public void listJogosContentTypeTest() {
+
         running(app, () -> {
+
             Http.RequestBuilder request = new Http.RequestBuilder()
                     .method(GET)
                     .uri("/jogos");
@@ -73,10 +77,11 @@ public class JogoRouteTest extends WithApplication {
     public void listJogosBodyTest() {
 
         final JsonNode expected = Json.newObject()
-                .set("jogo", Json.newArray()
+                .set("jogos", Json.newArray()
                         .add(Json.toJson(jogoDisponivel))
                         .add(Json.toJson(jogoIndisponivel)));
         running(app, () ->{
+
             Http.RequestBuilder request = new Http.RequestBuilder()
                     .method(GET)
                     .uri("/jogos");
@@ -84,5 +89,37 @@ public class JogoRouteTest extends WithApplication {
             assertThat(Json.parse(contentAsString(response)), equalTo(expected));
         });
     }
+
+    @Test
+    public void updateJogosBadRequestTest() {
+
+        running(app, () ->{
+
+            Http.RequestBuilder request = new Http.RequestBuilder()
+                    .method(PUT)
+                    .uri("/jogos/10")
+                    .bodyJson(
+                            Json.newObject());
+            Result response = route(request);
+            assertThat(response.status(), equalTo(BAD_REQUEST));
+        });
+    }
+
+    @Test
+    public void updateJogosSuccessTest() {
+
+        running(app, () ->{
+
+            Http.RequestBuilder request = new Http.RequestBuilder()
+                    .method(PUT)
+                    .uri("/jogos/10")
+                    .bodyJson(
+                            Json.newObject().
+                                    set("jogos", Json.toJson(jogoDisponivel)));
+            Result response = route(request);
+            assertThat(response.status(), equalTo(NO_CONTENT));
+        });
+    }
+
 
 }

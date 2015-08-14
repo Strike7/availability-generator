@@ -36,7 +36,13 @@ public class JogoRepositoryImpl implements JogoRepository{
     }
 
     @Override
-    public void update(Jogo jogo) {
+    public void update(Long id, Jogo jogo) {
+        jogo = jogo.copy(id);
         JPA.em().merge(jogo);
+    }
+
+    @Override
+    public void update(Jogo jogo) {
+        update(jogo.id , jogo);
     }
 }

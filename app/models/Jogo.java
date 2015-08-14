@@ -17,6 +17,9 @@ public class Jogo implements Cloneable {
     public final String cover;
     public Boolean disponibilidade;
 
+    public Jogo() {
+        this("", "", false);
+    }
 
     public Jogo(String titulo, String cover, boolean disponiblidade){
         this.titulo = titulo;
@@ -53,5 +56,15 @@ public class Jogo implements Cloneable {
     @Override
     public int hashCode() {
         return Objects.hashCode(id, titulo);
+    }
+
+    public Jogo copy(Long id) {
+        try {
+            Jogo copy = clone();
+            copy.id = id;
+            return copy;
+        }catch (CloneNotSupportedException e){
+            return null;
+        }
     }
 }
