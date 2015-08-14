@@ -21,7 +21,7 @@ public class CoverController extends Controller {
         this.coverUrlService = coverUrlService;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Result cover(Long id) {
         Jogo jogo = jogoRepository.find(id);
         return temporaryRedirect(coverUrlService.urlFrom(jogo));

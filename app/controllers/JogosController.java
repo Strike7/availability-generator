@@ -15,15 +15,21 @@ import java.util.List;
 
 public class JogosController extends Controller{
 
-    @Inject
     JogoRepository jogoRepository;
 
+    @Inject
+    public JogosController(JogoRepository jogoRepository) {
+        this.jogoRepository = jogoRepository;
+    }
+
+    @Transactional(readOnly = true)
     public Result list() {
 
         List<Jogo> jogos = jogoRepository.list();
         return ok(resultJson(Json.toJson(jogos))).as(Http.MimeTypes.JSON);
     }
 
+    @Transactional
     @BodyParser.Of(BodyParser.Json.class)
     public Result update(Long id) {
 

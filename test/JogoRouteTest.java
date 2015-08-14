@@ -11,6 +11,7 @@ import org.junit.Test;
 import play.Application;
 import play.ApplicationLoader;
 import play.Environment;
+import play.db.jpa.JPA;
 import play.inject.guice.GuiceApplicationBuilder;
 import play.inject.guice.GuiceApplicationLoader;
 import play.libs.Json;
@@ -31,20 +32,24 @@ import static org.mockito.Mockito.when;
 import static play.test.Helpers.*;
 import static org.junit.Assert.*;
 
-public class JogoRouteTest extends WithApplication {
+public class JogoRouteTest {
 
     final Jogo jogoDisponivel = new Jogo("a", "b", true);
     final Jogo jogoIndisponivel = new Jogo("c", "d", false);
+    @Inject
+    Application app;
 
-    @Override
-    protected Application provideApplication() {
+    @Before
+    public void setup() {
+        Jogo jogoDisponivel = new Jogo("a", "b", true);
+        Jogo jogoIndisponivel = new Jogo("c", "d", false);
 
         JogoRepository repo = mock(JogoRepository.class);
         when(repo.find(10L)).thenReturn(jogoDisponivel);
         when(repo.find(11L)).thenReturn(jogoIndisponivel);
         when(repo.list()).thenReturn(Arrays.asList(jogoDisponivel, jogoIndisponivel));
-        Module testModule = new AbstractModule() {
 
+        Module testModule = new AbstractModule() {
             @Override
             public void configure() {
                 bind(JogoRepository.class)
@@ -55,8 +60,12 @@ public class JogoRouteTest extends WithApplication {
         GuiceApplicationBuilder builder = new GuiceApplicationLoader()
                 .builder(new ApplicationLoader.Context(Environment.simple()))
                 .overrides(testModule);
-        Guice.createInjector(builder.applicationModule());
-        return builder.build();
+        Guice.createInjector(builder.applicationModule()).injectMembers(this);
+    }
+
+    @After
+    public void teardown() {
+        Helpers.stop(app);
     }
 
     @Test
@@ -108,16 +117,16 @@ public class JogoRouteTest extends WithApplication {
     @Test
     public void updateJogosSuccessTest() {
 
-        running(app, () ->{
+        running(app, () -> {
 
-            Http.RequestBuilder request = new Http.RequestBuilder()
-                    .method(PUT)
-                    .uri("/jogos/10")
-                    .bodyJson(
-                            Json.newObject().
-                                    set("jogos", Json.toJson(jogoDisponivel)));
-            Result response = route(request);
-            assertThat(response.status(), equalTo(NO_CONTENT));
+                Http.RequestBuilder request = new Http.RequestBuilder()
+                        .method(PUT)
+                        .uri("/jogos/10")
+                        .bodyJson(
+                                Json.newObject().
+                                        set("jogos", Json.toJson(jogoDisponivel)));
+                Result response = route(request);
+                assertThat(response.status(), equalTo(NO_CONTENT));
         });
     }
 
