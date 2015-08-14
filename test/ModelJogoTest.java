@@ -10,6 +10,7 @@ import repository.impl.JogoRepositoryImpl;
 
 import static org.hamcrest.CoreMatchers.*;
 import javax.inject.Inject;
+import java.util.List;
 
 public class ModelJogoTest extends WithApplication {
 
@@ -30,6 +31,17 @@ public class ModelJogoTest extends WithApplication {
             Long id = repo.save(jogo);
             assertThat(id.compareTo(0L), equalTo(1));
             assertThat(jogo.id, allOf(notNullValue(), sameInstance(id)));
+        });
+    }
+
+    @Test
+    public void testJogoList(){
+        JPA.withTransaction(()->{
+            JogoRepository repo = new JogoRepositoryImpl();
+            repo.save(jogo);
+            List<Jogo> result = repo.list();
+            assertThat(result.size(), equalTo(1));
+            assertThat(result.contains(jogo), equalTo(Boolean.TRUE));
         });
     }
 
