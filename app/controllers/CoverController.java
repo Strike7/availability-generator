@@ -1,13 +1,11 @@
 package controllers;
 
 import models.CoverUrlService;
-import models.CoverUrlServiceAmazonS3;
 import models.Jogo;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import repository.JogoRepository;
-import repository.impl.JogoRepositoryImp;
 
 import javax.inject.Inject;
 

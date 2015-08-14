@@ -6,16 +6,11 @@ import org.junit.*;
 import play.Application;
 import play.ApplicationLoader;
 import play.Environment;
-import play.db.jpa.JPA;
-import play.db.jpa.Transactional;
 import play.inject.guice.GuiceApplicationBuilder;
 import play.inject.guice.GuiceApplicationLoader;
-import play.libs.F.*;
-import play.libs.ws.*;
 import play.mvc.*;
 import play.test.*;
 import repository.JogoRepository;
-import repository.impl.JogoRepositoryImp;
 
 import javax.inject.Inject;
 

@@ -1,20 +1,15 @@
 import static org.junit.Assert.*;
 
-import models.CoverUrlServiceAmazonS3;
 import org.junit.Test;
 import models.Jogo;
 import play.db.jpa.JPA;
-import play.libs.F.*;
 import play.libs.ws.*;
-import models.CoverUrlService;
 import play.test.*;
 import repository.JogoRepository;
-import repository.impl.JogoRepositoryImp;
+import repository.impl.JogoRepositoryImpl;
 
-import static play.test.Helpers.*;
 import static org.hamcrest.CoreMatchers.*;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 public class ModelJogoTest extends WithApplication {
 
@@ -31,7 +26,7 @@ public class ModelJogoTest extends WithApplication {
     @Test
     public void testAppPersistence(){
         JPA.withTransaction(() -> {
-            JogoRepository repo = new JogoRepositoryImp();
+            JogoRepository repo = new JogoRepositoryImpl();
             Long id = repo.save(jogo);
             assertThat(id.compareTo(0L), equalTo(1));
             assertThat(jogo.id, allOf(notNullValue(), sameInstance(id)));

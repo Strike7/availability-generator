@@ -2,14 +2,16 @@ package repository;
 
 import com.google.inject.ImplementedBy;
 import models.Jogo;
-import repository.impl.JogoRepositoryImp;
+import repository.impl.JogoRepositoryImpl;
 
-import javax.inject.Singleton;
+import java.util.List;
 
-@ImplementedBy(JogoRepositoryImp.class)
+@ImplementedBy(JogoRepositoryImpl.class)
 public interface JogoRepository  {
 
     public Long save(Jogo jogo);
 
     public Jogo find(Long id);
+
+    public List<Jogo> list();
 }
