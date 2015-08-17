@@ -6,17 +6,18 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "JOGOS")
 public class Jogo implements Cloneable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     public Long id;
     public final String titulo;
     public final String capa;
     public Boolean disponibilidade;
 
     @Temporal(TemporalType.TIMESTAMP)
-    public final Date create_on = new Date();
+    public final Date created_on = new Date();
 
     public Jogo() {
         this("", "", false);
