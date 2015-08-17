@@ -10,9 +10,9 @@ public class CoverUrlServiceAmazonS3 extends CoverUrlService {
 
     public String urlFrom(Jogo jogo){
         if (jogo.disponibilidade){
-            return urlBase + "cover/" + jogo.cover;
+            return urlBase + "cover/" + jogo.capa;
         }else {
-            return urlBase + "cover+alugado/" + jogo.cover;
+            return urlBase + "cover+alugado/" + jogo.capa;
         }
     }
 }

@@ -2,10 +2,8 @@ package models;
 
 import com.google.common.base.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Jogo implements Cloneable {
@@ -14,16 +12,19 @@ public class Jogo implements Cloneable {
     @GeneratedValue(strategy= GenerationType.AUTO)
     public Long id;
     public final String titulo;
-    public final String cover;
+    public final String capa;
     public Boolean disponibilidade;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    public final Date create_on = new Date();
 
     public Jogo() {
         this("", "", false);
     }
 
-    public Jogo(String titulo, String cover, boolean disponiblidade){
+    public Jogo(String titulo, String capa, boolean disponiblidade){
         this.titulo = titulo;
-        this.cover = cover;
+        this.capa = capa;
         this.disponibilidade = disponiblidade;
     }
 
@@ -37,7 +38,7 @@ public class Jogo implements Cloneable {
         return "Jogo{" +
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
-                ", cover='" + cover + '\'' +
+                ", cover='" + capa + '\'' +
                 ", disponibilidade=" + disponibilidade +
                 '}';
     }
@@ -49,7 +50,7 @@ public class Jogo implements Cloneable {
         Jogo jogo = (Jogo) o;
         return Objects.equal(id, jogo.id) &&
                 Objects.equal(titulo, jogo.titulo) &&
-                Objects.equal(cover, jogo.cover) &&
+                Objects.equal(capa, jogo.capa) &&
                 Objects.equal(disponibilidade, jogo.disponibilidade);
     }
 

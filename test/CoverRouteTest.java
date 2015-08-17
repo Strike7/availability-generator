@@ -58,7 +58,7 @@ public class CoverRouteTest {
         running(application, () -> {
             Http.RequestBuilder request = new Http.RequestBuilder()
                     .method(GET)
-                    .uri("/cover/10");
+                    .uri("/api/capa/10");
             Result result = route(application, request);
             assertThat(result.status(), equalTo(TEMPORARY_REDIRECT));
             assertThat(result.redirectLocation(), containsString("/cover/"));
@@ -70,7 +70,7 @@ public class CoverRouteTest {
         running(application, () ->{
             Http.RequestBuilder request = new Http.RequestBuilder()
                     .method(GET)
-                    .uri("/cover/11");
+                    .uri("/api/capa/11");
             Result result = route(application, request);
             assertThat(result.status(), equalTo(TEMPORARY_REDIRECT));
             assertThat(result.redirectLocation(), containsString("/cover+alugado/"));

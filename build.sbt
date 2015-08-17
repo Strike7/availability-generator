@@ -7,6 +7,8 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava)
 libraryDependencies ++= Seq(
   javaJpa,
   javaWs,
+  evolutions,
+  "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
   "org.hibernate" % "hibernate-entitymanager" % "4.3.7.Final"
 )
 

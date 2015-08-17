@@ -75,7 +75,7 @@ public class JogoRouteTest {
 
             Http.RequestBuilder request = new Http.RequestBuilder()
                     .method(GET)
-                    .uri("/jogos");
+                    .uri("/api/jogos");
             Result response = route(request);
             assertThat(response.status(), equalTo(OK));
             assertThat(response.contentType(), equalTo(Http.MimeTypes.JSON));
@@ -93,7 +93,7 @@ public class JogoRouteTest {
 
             Http.RequestBuilder request = new Http.RequestBuilder()
                     .method(GET)
-                    .uri("/jogos");
+                    .uri("/api/jogos");
             Result response = route(request);
             assertThat(Json.parse(contentAsString(response)), equalTo(expected));
         });
@@ -106,7 +106,7 @@ public class JogoRouteTest {
 
             Http.RequestBuilder request = new Http.RequestBuilder()
                     .method(POST)
-                    .uri("/jogos")
+                    .uri("/api/jogos")
                     .bodyJson(
                             Json.newObject().
                                     set("jogos", Json.toJson(jogoDisponivel)));
@@ -122,7 +122,7 @@ public class JogoRouteTest {
 
             Http.RequestBuilder request = new Http.RequestBuilder()
                     .method(PUT)
-                    .uri("/jogos/10")
+                    .uri("/api/jogos/10")
                     .bodyJson(
                             Json.newObject());
             Result response = route(request);
@@ -137,7 +137,7 @@ public class JogoRouteTest {
 
                 Http.RequestBuilder request = new Http.RequestBuilder()
                         .method(PUT)
-                        .uri("/jogos/10")
+                        .uri("/api/jogos/10")
                         .bodyJson(
                                 Json.newObject().
                                         set("jogos", Json.toJson(jogoDisponivel)));

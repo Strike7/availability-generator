@@ -61,7 +61,7 @@ public class ModelJogoTest extends WithApplication {
     @Test
     public void testCover(){
         String expected = "mkx.png";
-        assertThat(jogo.cover, equalTo(expected));
+        assertThat(jogo.capa, equalTo(expected));
     }
 
     @Test
