@@ -33,10 +33,10 @@ public class JogosController extends Controller{
     public Result create() {
 
         JsonNode jsonJogo = request().body().asJson();
-        if(jsonJogo == null || !jsonJogo.has("jogos") || jsonJogo.findPath("jogos").isArray()) {
+        if(jsonJogo == null || !jsonJogo.has("jogo") || jsonJogo.findPath("jogo").isArray()) {
             return badRequest();
         }
-        Jogo jogo = Json.fromJson(jsonJogo.findPath("jogos"), Jogo.class);
+        Jogo jogo = Json.fromJson(jsonJogo.findPath("jogo"), Jogo.class);
         jogoRepository.save(jogo);
         return created();
     }
@@ -46,10 +46,10 @@ public class JogosController extends Controller{
     public Result update(Long id) {
 
         JsonNode jsonJogo = request().body().asJson();
-        if(jsonJogo == null || !jsonJogo.has("jogos") || jsonJogo.findPath("jogos").isArray()) {
+        if(jsonJogo == null || !jsonJogo.has("jogo") || jsonJogo.findPath("jogo").isArray()) {
             return badRequest();
         }
-        Jogo jogo = Json.fromJson(jsonJogo.findPath("jogos"), Jogo.class);
+        Jogo jogo = Json.fromJson(jsonJogo.findPath("jogo"), Jogo.class);
         jogoRepository.update(id, jogo);
         return noContent();
     }
