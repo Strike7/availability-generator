@@ -22,8 +22,9 @@ public class CoverController extends Controller {
     }
 
     @Transactional(readOnly = true)
-    public Result cover(Long id) {
+    public Result cover(Long id, String tipo) {
+        boolean showBar = (tipo.equals("barra"))? true: false;
         Jogo jogo = jogoRepository.find(id);
-        return temporaryRedirect(coverUrlService.urlFrom(jogo));
+        return temporaryRedirect(coverUrlService.urlFrom(jogo, showBar));
     }
 }

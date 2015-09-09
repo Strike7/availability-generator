@@ -22,8 +22,8 @@ public class AmazonS3ResponseTest extends WithApplication {
     @Test
     public void testUrlCoverExistsS3() {
         CoverUrlService service = mock(CoverUrlService.class);
-        when(service.urlFrom(anyObject())).thenReturn("http://s3-sa-east-1.amazonaws.com/strike7-image/cover/mkx.png");
-        String urlCover = service.urlFrom(jogo);
+        when(service.urlFrom(anyObject(), anyBoolean())).thenReturn("http://s3-sa-east-1.amazonaws.com/strike7-image/cover+disponiveis/mkx.png");
+        String urlCover = service.urlFrom(jogo, false);
         F.Promise<WSResponse> promise = WS.url(urlCover).get();
         assertThat(promise.get(1000).getStatus(), equalTo(OK));
     }
@@ -31,8 +31,8 @@ public class AmazonS3ResponseTest extends WithApplication {
     @Test
     public void testUnavailabilityUrlCoverExistsS3() {
         CoverUrlService service = mock(CoverUrlService.class);
-        when(service.urlFrom(anyObject())).thenReturn("http://s3-sa-east-1.amazonaws.com/strike7-image/cover+alugados/mkx.png");
-        String urlCover = service.urlFrom(jogo);
+        when(service.urlFrom(anyObject(), anyBoolean())).thenReturn("http://s3-sa-east-1.amazonaws.com/strike7-image/cover+alugados/mkx.png");
+        String urlCover = service.urlFrom(jogo, false);
         System.out.println(urlCover);
         F.Promise<WSResponse> promise = WS.url(urlCover).get();
         assertThat(promise.get(1000).getStatus(), equalTo(OK));

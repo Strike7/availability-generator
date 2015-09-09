@@ -54,26 +54,50 @@ public class CoverRouteTest {
 
 
     @Test
-    public void someIdiotTest() {
+    public void testCoverDisponiveis() {
         running(application, () -> {
             Http.RequestBuilder request = new Http.RequestBuilder()
                     .method(GET)
                     .uri("/api/capa/10");
             Result result = route(application, request);
             assertThat(result.status(), equalTo(TEMPORARY_REDIRECT));
-            assertThat(result.redirectLocation(), containsString("/cover/"));
+            assertThat(result.redirectLocation(), containsString("/cover+disponiveis/"));
         });
     }
 
     @Test
-    public void someIdiotTest2() {
-        running(application, () ->{
+    public void testCoverAlugados() {
+        running(application, () -> {
             Http.RequestBuilder request = new Http.RequestBuilder()
                     .method(GET)
                     .uri("/api/capa/11");
             Result result = route(application, request);
             assertThat(result.status(), equalTo(TEMPORARY_REDIRECT));
-            assertThat(result.redirectLocation(), containsString("/cover+alugado/"));
+            assertThat(result.redirectLocation(), containsString("/cover+alugados/"));
+        });
+    }
+
+    @Test
+    public void testCoverBarraDisponivel(){
+        running(application, () -> {
+            Http.RequestBuilder request = new Http.RequestBuilder()
+                    .method(GET)
+                    .uri("/api/capa/10?tipo=barra");
+            Result result = route(application, request);
+            assertThat(result.status(), equalTo(TEMPORARY_REDIRECT));
+            assertThat(result.redirectLocation(), containsString("/cover+disponiveis/bar.png"));
+        });
+    }
+
+    @Test
+    public void testCoverBarraAlugado() {
+        running(application, () -> {
+            Http.RequestBuilder request = new Http.RequestBuilder()
+                    .method(GET)
+                    .uri("/api/capa/11?tipo=barra");
+            Result result = route(application, request);
+            assertThat(result.status(), equalTo(TEMPORARY_REDIRECT));
+            assertThat(result.redirectLocation(), containsString("/cover+alugados/bar.png"));
         });
     }
 }

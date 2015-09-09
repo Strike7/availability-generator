@@ -7,6 +7,6 @@ package models;
 public abstract class CoverUrlService {
 
 
-   public abstract String urlFrom(Jogo jogo);
+   public abstract String urlFrom(Jogo jogo, boolean showBar);
 
 }

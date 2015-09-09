@@ -6,7 +6,7 @@
 GET     /                           controllers.Application.index()
 POST    /person                     controllers.Application.addPerson()
 GET     /persons                    controllers.Application.getPersons
-GET     /capa/:id                  controllers.CoverController.cover(id: Long)
+GET     /capa/:id                  controllers.CoverController.cover(id: Long, tipo: String ?= "capa")
 
 GET     /jogos                      controllers.JogosController.list
 
