@@ -109,7 +109,7 @@ public class JogoRouteTest {
                     .uri("/api/jogos")
                     .bodyJson(
                             Json.newObject().
-                                    set("jogos", Json.toJson(jogoDisponivel)));
+                                    set("jogo", Json.toJson(jogoDisponivel)));
             Result response = route(request);
             assertThat(response.status(), equalTo(CREATED));
         });
@@ -140,7 +140,7 @@ public class JogoRouteTest {
                         .uri("/api/jogos/10")
                         .bodyJson(
                                 Json.newObject().
-                                        set("jogos", Json.toJson(jogoDisponivel)));
+                                        set("jogo", Json.toJson(jogoDisponivel)));
                 Result response = route(request);
                 assertThat(response.status(), equalTo(NO_CONTENT));
         });
