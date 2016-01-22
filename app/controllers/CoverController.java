@@ -2,6 +2,7 @@ package controllers;
 
 import models.CoverUrlService;
 import models.Jogo;
+import play.Logger;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -23,8 +24,9 @@ public class CoverController extends Controller {
 
     @Transactional(readOnly = true)
     public Result cover(Long id, String tipo) {
-        boolean showBar = (tipo.equals("barra"))? true: false;
+
         Jogo jogo = jogoRepository.find(id);
-        return temporaryRedirect(coverUrlService.urlFrom(jogo, showBar));
+        Logger.debug(jogo.toString());
+        return temporaryRedirect(coverUrlService.urlFrom(jogo, tipo));
     }
 }

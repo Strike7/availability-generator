@@ -6,6 +6,7 @@ CREATE TABLE "JOGOS"
   "CAPA" text,
   "DISPONIBILIDADE" boolean,
   "CREATED_ON" timestamp without time zone,
+  "DATA_RESERVA" timestamp default current_date,
   CONSTRAINT jogos_id_pk PRIMARY KEY ("ID")
 )
 WITH (

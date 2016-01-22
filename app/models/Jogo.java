@@ -3,6 +3,8 @@ package models;
 import com.google.common.base.Objects;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -17,16 +19,25 @@ public class Jogo implements Cloneable {
     public Boolean disponibilidade;
 
     @Temporal(TemporalType.TIMESTAMP)
+    public Date data_reserva;
+
+    @Temporal(TemporalType.TIMESTAMP)
     public final Date created_on = new Date();
 
     public Jogo() {
-        this("", "", false);
+        this("", "",new Date(), false);
     }
 
-    public Jogo(String titulo, String capa, boolean disponiblidade){
+    public Jogo(String titulo, String capa, Date data_reserva, boolean disponiblidade){
         this.titulo = titulo;
         this.capa = capa;
+        this.data_reserva = data_reserva;
         this.disponibilidade = disponiblidade;
+    }
+
+    public String getDataReservaFormatada(){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(this.data_reserva);
     }
 
     @Override
